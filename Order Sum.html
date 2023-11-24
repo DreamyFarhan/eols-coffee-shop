@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - EOL's Coffee Shop</title>
+</head>
+<body>
+    <h1>Order Confirmation</h1>
+
+    <p>Total Order Amount: RM <?php echo htmlspecialchars($_GET["totalAmount"]); ?></p>
+
+    <form action="order_confirmation.html" method="get">
+   
+    <button type="button" onclick="calculateTotal()">Calculate Total</button>
+
+    <div id="totalAmount"></div>
+
+    <input type="hidden" id="totalAmountInput" name="totalAmount" value="">
+
+    <button type="submit">Place Order</button>
+ 
+</form>
+
+</body>
+</html>

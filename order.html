@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Style.css">
+    <script src="order.js"></script>
+    <title>Order UP! - EOL's Coffee Shop</title>
+    <style>
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+        }
+
+        button {
+            background-color: #663300;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #996633;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        #confirmation {
+            display: none;
+            color:white;
+            text-align: center;
+            background-color:#996633;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Coffee Shop Order</h1>
+    <nav>
+        <a href="main menu.html">Main menu</a>
+        <a href="menu.html">Menu</a>
+        <a href="register.html">Register</a>
+        <a href="location.html">Location</a>
+        <a href="order.html">Order</a>
+    </nav>
+    <h1>Place Your Order</h1>
+
+    <form id="orderForm">
+        <label for="coffeeType">Select Coffee:</label>
+        <select id="coffeeType" name="coffeeType">
+            <option value="americano" data-price="5.99">Americano</option>
+            <option value="espresso" data-price="6.99">Espresso</option>
+            <option value="latte" data-price="6.99">Latte</option>
+            <option value="Macchiato" data-price="9.99">Macchiato</option>
+            <option value="Flat White" data-price="10.99">Flat White</option>
+            <option value="Cappuccino" data-price="11.99">Cappuccino</option>
+        </select>
+        <label for="NoncoffeeType">Select Non-Coffee(Optional):</label>
+        <select id="NoncoffeeType" name="NoncoffeeType">
+            <option value="">- No Non-Coffee -</option>
+            <option value="Hot Chocolate"data-price="5.99">Hot Chocolate</option>
+            <option value="Milkshake"data-price="5.99">Milkshake</option>
+            <option value="Smoothie"data-price="5.99">Smoothie</option>
+            <option value="Lemonade"data-price="7.99">Lemonade</option>
+            <option value="Vanilla Milkshake"data-price="8.99">Vanilla Milkshake</option>
+        </select>
+        <label for="DessertType">Select Desert(Optional):</label>
+        <select id="Dessert" name="DessertType">
+            <option value="">- No Dessert -</option>
+            <option value="Strawberry Waffle"data-price="5.00">Strawberry Waffle</option>
+            <option value="Chocolate Waffle"data-price="5.00">Chocolate Waffle</option>
+            <option value="Cinnamon Roll"data-price="5.00">Cinnamon Roll</option>
+            <option value="Brownies"data-price="5.00">Brownies</option>
+            <option value="Lemon Pie"data-price="5.00">Lemon Pie</option>
+            <option value="Cheesecake"data-price="7.00">Cheesecake</option>
+            <option value="Croissant"data-price="5.00">Croissant</option>
+            <option value="Chocolate Muffin"data-price="10.00">Chocolate Muffin</option>
+        </select>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" value="1">
+
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone number">Your Phone Number:</label>
+        <input type="phone number" id="phone number" name="phone number" required>
+
+        <label for="additionalNotes">Additional Notes:</label>
+        <textarea id="additionalNotes" name="additionalNotes" rows="4"></textarea>
+
+        <button type="button" onclick="placeOrder()">Place Order</button>
+    </form>
+
+    <div id="confirmation">
+        <p>Thank you for your order! Your total is $X.XX. We appreciate your business. Please come again!</p>
+    </div>
+
+    <script>
+    function placeOrder() {
+        // Get selected items and quantity
+        var coffeeType = document.getElementById('coffeeType');
+        var nonCoffeeType = document.getElementById('NoncoffeeType');
+        var dessertType = document.getElementById('Dessert');
+        var quantity = document.getElementById('quantity').valueAsNumber;
+    
+        // Get prices from data attributes
+        var coffeePrice = parseFloat(coffeeType.options[coffeeType.selectedIndex].getAttribute('data-price')) || 0;
+        var nonCoffeePrice = parseFloat(nonCoffeeType.options[nonCoffeeType.selectedIndex].getAttribute('data-price')) || 0;
+        var dessertPrice = parseFloat(dessertType.options[dessertType.selectedIndex].getAttribute('data-price')) || 0;
+    
+        // Calculate total
+        var total = (coffeePrice + nonCoffeePrice + dessertPrice) * quantity;
+    
+        // Display the confirmation message with formatted total
+        document.getElementById('confirmation').style.display = 'block';
+        document.getElementById('confirmation').innerHTML = "Thank you for your order! Your total is $" + total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+    </script>
+    
+</body>
+</html>
